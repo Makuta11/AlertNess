@@ -112,7 +112,7 @@ with tf.device('/GPU:0'):
   modelDic = dict()
   k = 0
 
-  for train_index, test_index in kf.split(X):
+  for train_index, test_index in kf.split(X, random_state = 42):
       # Keep up with Fold
       print(f'Currently running fold: {k+1}/{numSplits}')
 
@@ -198,7 +198,7 @@ with tf.device('/GPU:0'):
   ########################################################################################
   k = 0;
   f1 = dict()
-  for train_index, test_index in kf.split(X):
+  for train_index, test_index in kf.split(X, random_state = 42):
     ### CLASSIFIER SETUP ###
     # Run classifier on test data and create prediction label
     y_pred = np.argmax(modelDic[k].predict(X[test_index]), axis=1).astype(int)
