@@ -103,7 +103,7 @@ with tf.device('/GPU:0'):
   numSplits = kf.get_n_splits(X)
 
   # Training Parameters
-  epochs = 600
+  epochs = 1000
   batch_size = 32 
   #callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
 
