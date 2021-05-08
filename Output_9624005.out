@@ -1,0 +1,71 @@
+Runnin script...
+2.4.1
+the shape of the data is: (42480, 25)
+
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 9624005: <My_Test_HPC> in cluster <dcc> Exited
+
+Job <My_Test_HPC> was submitted from host <gbarlogin2> by user <s164272> in cluster <dcc> at Sat May  8 23:34:44 2021
+Job was executed on host(s) <n-62-11-14>, in queue <gpuv100>, as user <s164272> in cluster <dcc> at Sat May  8 23:34:45 2021
+</zhome/08/3/117881> was used as the home directory.
+</zhome/08/3/117881/AlertNess> was used as the working directory.
+Started at Sat May  8 23:34:45 2021
+Terminated at Sat May  8 23:34:52 2021
+Results reported at Sat May  8 23:34:52 2021
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -q gpuv100
+#BSUB -gpu "num=1"
+#BSUB -J My_Test
+### number of core
+#BSUB -n 1 
+### specify that all cores should be on the same host
+#BSUB -R "span[hosts=1]"
+#BSUB -J My_Test_HPC
+### specify the memory needed
+#BSUB -R "rusage[mem=32GB]"
+#BSUB -R "select[gpu32gb]"
+### Number of hours needed
+#BSUB -W 23:59
+### added outputs and errors to files
+#BSUB -o Output_%J.out
+#BSUB -e Error_%J.err
+
+echo "Runnin script..."
+
+source venv_1/bin/activate
+module load tensorrt/7.2.1.6-cuda-11.0
+module load cudnn/v8.0.5.39-prod-cuda-11.0
+
+python3 main.py 
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   3.32 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     32768.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   42 sec.
+    Turnaround time :                            8 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <Error_9624005.err> for stderr output of this job.
+
