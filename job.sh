@@ -19,5 +19,7 @@
 echo "Runnin script..."
 
 source venv_1/bin/activate
+module load tensorrt/7.2.1.6-cuda-11.0
+module load cudnn/v8.0.5.39-prod-cuda-11.0
 
 python3 main.py 
