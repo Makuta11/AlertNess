@@ -141,12 +141,13 @@ for train_index, test_index in kf.split(X):
         .batch(batch_size)
 
     # Train the model
-    history = model.fit(
-        train_dataset,
-        epochs=epochs,
-        validation_data=test_dataset
-        #callbacks=[callback]
-    )
+    with tf.device('/GPU:0')
+      history = model.fit(
+          train_dataset,
+          epochs=epochs,
+          validation_data=test_dataset
+          #callbacks=[callback]
+      )
 
     # Append model results to dictionaries
     historyDic[k] = history
