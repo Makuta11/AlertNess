@@ -112,7 +112,7 @@ with tf.device('/GPU:0'):
   modelDic = dict()
   k = 0
 
-  for train_index, test_index in kf.split(X, random_state = 42):
+  for train_index, test_index in kf.split(X):
       # Keep up with Fold
       print(f'Currently running fold: {k+1}/{numSplits}')
 
@@ -191,14 +191,14 @@ with tf.device('/GPU:0'):
     plt.title('Training and Validation Loss')
     plt.xlabel('epoch')
 
-    plt.savefig(f'Figs/TrainingLoss_2feat_CV_Fold{k+1}.png', dpi=300)
+    plt.savefig(f'Figs/TrainingLoss_2feat_CV_Fold{k+1}_epoch:{epoch}.png', dpi=300)
 
   ########################################################################################
   ###############                  Plot Confusion Matrix                   ###############
   ########################################################################################
   k = 0;
   f1 = dict()
-  for train_index, test_index in kf.split(X, random_state = 42):
+  for train_index, test_index in kf.split(X):
     ### CLASSIFIER SETUP ###
     # Run classifier on test data and create prediction label
     y_pred = np.argmax(modelDic[k].predict(X[test_index]), axis=1).astype(int)
@@ -226,7 +226,7 @@ with tf.device('/GPU:0'):
     res = sns.heatmap(df_cm, annot=True, vmin=0.0, vmax=100.0, fmt='.2f', cmap=cmap)
     plt.yticks([0.5,1.5,2.5], [ 'Alert', 'Neutral','Drowsy'],va='center')
     plt.title(f'Confusion Matrix - Fold{k+1} - F1:{round(f1[k]*100, 2)}')
-    plt.savefig(f'Figs/Qmatrix_Fold{k}.png', dpi=300)
+    plt.savefig(f'Figs/Qmatrix_Fold:{k+1}_epoch:{epoch}.png', dpi=300)
 
     k += 1
 
@@ -244,6 +244,6 @@ with tf.device('/GPU:0'):
       tflite_quantized_model = converter.convert()
 
       # Save the quantized model to file to the Downloads directory
-      f = open(f'Models/kerasModel_2feat_Fold{k+1}_F1:{round(f1[k]*100,2)}.tflite', "wb")
+      f = open(f'Models/kerasModel_2feat_Fold{k+1}_F1:{round(f1[k]*100,2)}_epoch:{epoch}.tflite', "wb")
       f.write(tflite_quantized_model)
       f.close()
