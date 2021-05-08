@@ -228,7 +228,6 @@ with tf.device('/GPU:0'):
     plt.title(f'Confusion Matrix - Fold{k+1} - F1:{round(f1[k]*100, 2)}')
     plt.savefig(f'Figs/Qmatrix_Fold{k}.png', dpi=300)
 
-<<<<<<< HEAD
     k += 1
 
   ########################################################################################
@@ -248,22 +247,3 @@ with tf.device('/GPU:0'):
       f = open(f'Models/kerasModel_2feat_Fold{k+1}_F1:{round(f1[k]*100,2)}.tflite', "wb")
       f.write(tflite_quantized_model)
       f.close()
-=======
-########################################################################################
-###############                    Convert to TFLite                     ###############
-########################################################################################
-k = 0
-for k in range(4):
-    # Convert Keras model to TF Lite format.
-    converter = tf.lite.TFLiteConverter.from_keras_model(modelDic[k])
-    tflite_float_model = converter.convert()
-
-    # Re-convert the model to TF Lite using quantization.
-    converter.optimizations = [tf.lite.Optimize.DEFAULT]
-    tflite_quantized_model = converter.convert()
-
-    # Save the quantized model to file to the Downloads directory
-    f = open(f'Models/kerasModel_2feat_Fold{k+1}_F1:{round(f1[k]*100,2)}.tflite', "wb")
-    f.write(tflite_quantized_model)
-    f.close()
->>>>>>> aac35ba1a2c2e1f208f12b94cf0ded54777e928a
