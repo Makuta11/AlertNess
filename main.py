@@ -102,7 +102,7 @@ kf = KFold(n_splits = 4, shuffle=True, random_state=42)
 numSplits = kf.get_n_splits(X)
 
 # Training Parameters
-epochs = 600
+epochs = 2
 batch_size = 32 
 #callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
 
@@ -141,7 +141,7 @@ for train_index, test_index in kf.split(X):
         .batch(batch_size)
 
     # Train the model
-    with tf.device('/GPU:0')
+    with tf.device('/GPU:0'):
       history = model.fit(
           train_dataset,
           epochs=epochs,
