@@ -102,7 +102,7 @@ kf = KFold(n_splits = 4, shuffle=True, random_state=42)
 numSplits = kf.get_n_splits(X)
 
 # Training Parameters
-epochs = 1
+epochs = 20
 batch_size = 32 
 #callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
 
