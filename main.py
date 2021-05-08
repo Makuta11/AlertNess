@@ -232,7 +232,7 @@ for train_index, test_index in kf.split(X):
 ########################################################################################
 ###############                    Convert to TFLite                     ###############
 ########################################################################################
-k = 0;
+k = 0
 for k in range(4):
     # Convert Keras model to TF Lite format.
     converter = tf.lite.TFLiteConverter.from_keras_model(modelDic[k])
