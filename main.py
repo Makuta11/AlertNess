@@ -70,7 +70,7 @@ with tf.device('/GPU:0'):
     model = keras.Sequential([
         keras.layers.InputLayer(input_shape=(24,)),
         keras.layers.Dropout(DROP_OUT),
-        keras.layers.Dense(units=64, activation='relu'), #kernel_regularizer='l2'),
+        keras.layers.Dense(units=128, activation='relu'), #kernel_regularizer='l2'),
         #keras.layers.BatchNormalization(),
         keras.layers.Dropout(DROP_OUT),
         keras.layers.Dense(units=256, activation='relu'),#, kernel_regularizer='l2'),
