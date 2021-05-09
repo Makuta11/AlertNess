@@ -226,7 +226,7 @@ with tf.device('/GPU:0'):
     res = sns.heatmap(df_cm, annot=True, vmin=0.0, vmax=100.0, fmt='.2f', cmap=cmap)
     plt.yticks([0.5,1.5,2.5], [ 'Alert', 'Neutral','Drowsy'],va='center')
     plt.title(f'Confusion Matrix - Fold{k+1} - F1:{round(f1[k]*100, 2)}')
-    plt.savefig(f'Figs/Qmatrix_Fold:{k+1}_epoch:{epoch}.png', dpi=300)
+    plt.savefig(f'Figs/Qmatrix_Fold:{k+1}_epoch:{epochs}.png', dpi=300)
 
     k += 1
 
@@ -244,6 +244,6 @@ with tf.device('/GPU:0'):
       tflite_quantized_model = converter.convert()
 
       # Save the quantized model to file to the Downloads directory
-      f = open(f'Models/kerasModel_2feat_Fold{k+1}_F1:{round(f1[k]*100,2)}_epoch:{epoch}.tflite', "wb")
+      f = open(f'Models/kerasModel_2feat_Fold{k+1}_F1:{round(f1[k]*100,2)}_epoch:{epochs}.tflite', "wb")
       f.write(tflite_quantized_model)
       f.close()
