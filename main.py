@@ -103,8 +103,8 @@ with tf.device('/GPU:0'):
   numSplits = kf.get_n_splits(X)
 
   # Training Parameters
-  epochs = 1000
-  batch_size = 32
+  epochs = 1001
+  batch_size = 10
   #callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
 
   # Predefine variable
@@ -120,7 +120,7 @@ with tf.device('/GPU:0'):
       model = create_model(DROP_OUT=0.02)
 
       # Compile model
-      model.compile(optimizer = tf.keras.optimizers.Adam(1e-4),
+      model.compile(optimizer = tf.keras.optimizers.Adam(1e-5),
                   loss=tf.losses.CategoricalCrossentropy(from_logits=False),
                   metrics=['accuracy'])
 
